@@ -4,6 +4,13 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
 // O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
 
+void move(int totalMoveSteps, char direction[30]) {
+    if (totalMoveSteps > 0) {
+        printf(direction);
+        move(totalMoveSteps - 1, direction);
+    };
+}
+
 int main() {
     // Nível Aventureiro - Movimentação do Cavalo
     const int bishopMove = 5;
@@ -13,34 +20,30 @@ int main() {
     const int horseFirstStepMove = 2;
     const int horseSecondStepMove = 1;
 
-    int i;
-
-
     printf("Movimento do bispo: \n");
-    for(i = 0; i < bishopMove; i++) {
-        printf("Cima Direita\n");
-    }
+    move(bishopMove, "Cima Direita\n");
 
 
     printf("\nMovimento da torre:\n");
-    i = 0;
-    while(i++ < towerMove) {
-        printf("Direita\n");
-    }
+    move(towerMove, "Direita\n");
 
 
     printf("\nMovimento da rainha: \n");
-    i = 0;
-    do {
-        printf("Esquerda\n");
-    } while(i++ < queenMove);
+    move(queenMove, "Esquerda\n");
 
 
-    printf("\nMovimento da torre: \n");
-    i = 0;
-    for (int j = 0; j < horseFirstStepMove; j++) {
-        printf("Baixo\n");
+    printf("\nMovimento do cavalo: \n");
+    for (int j = 0, i = 0; j < horseFirstStepMove; j++) {
+        printf("Cima\n");
         while (j + 1 >= horseFirstStepMove && (i++ < horseSecondStepMove)) {
+            printf("Direita\n");
+        }
+    }
+
+    printf("\nMovimento do bispo (com loops aninhados): \n");
+    for (int j = 0, i = 0; j < bishopMove; j++, i = 0) {
+        printf("Baixo\n");
+        while (i++ < 1) {
             printf("Direita\n");
         }
     }
